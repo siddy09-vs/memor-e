@@ -1,0 +1,147 @@
+:root {
+  --background: #aedcc0;
+  --title-text: #343e3d;
+  --accent: #607466;
+  --accent-hover: #526357;
+  --accent-active: #48574c;
+  --text-main: #e9ecef;
+  --text-main-accent: #a9aaac;
+}
+
+::selection {
+  background-color: var(--text-main-accent);
+  color: var(--text-main);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  position: fixed;
+}
+
+a {
+  text-decoration: none;
+}
+
+.back-arrow {
+  color: var(--accent);
+  text-align: center;
+  font-family: 'EB Garamond';
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  margin-left: 20px;
+  transition: color 0.15s;
+}
+
+.back-arrow:hover {
+  color: var(--accent-hover);
+}
+
+main {
+  background: var(--background);
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-text {
+  color: var(--title-text);
+  text-align: center;
+  font-family: 'EB Garamond';
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 125px 0 454px 0;
+}
+
+.header-started {
+  margin-bottom: 275px;
+}
+
+.button {
+  background: var(--accent);
+  border: 3px solid var(--title-text);
+  border-radius: 40px;
+  color: var(--text-main);
+
+  width: 180px;
+  height: 75px;
+  flex-shrink: 0;
+
+  text-align: center;
+  font-family: 'EB Garamond';
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  appearance: none;
+  -webkit-appearance: none;
+  transition: background-color 0.15s;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: var(--accent-hover);
+}
+
+.button:active {
+  background: var(--accent-active);
+}
+
+.started-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter {
+  width: 44px;
+  color: var(--title-text);
+  font-family: 'EB Garamond';
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 40px 0;
+}
+
+.input-box {
+  width: 700px;
+  height: 75px;
+  flex-shrink: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  border-radius: 15px;
+  border: 3px solid var(--title-text);
+  background: var(--accent);
+
+  color: var(--text-main);
+  font-family: 'EB Garamond';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input-box:focus {
+  outline: none;
+  border: 3px solid var(--title-text);
+  background: var(--accent-hover);
+}
+
+.input-box::placeholder {
+  color: var(--text-main-accent);
+}
