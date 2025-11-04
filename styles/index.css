@@ -9,7 +9,7 @@
 }
 
 ::selection {
-  background-color: var(--text-main-accent);
+  background-color: var(--accent);
   color: var(--text-main);
 }
 

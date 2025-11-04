@@ -21,17 +21,7 @@ async function init() {
   const headerElement = document.querySelector('.header-text');
   const gameoverImageElement = document.querySelector('.gameover-image');
 
-  startElement.classList.add('start-button-hidden');
-  counterElement.classList.remove('counter-hidden');
-  inputElement.classList.remove('input-box-hidden');
-  headerElement.classList.add('header-text-started');
-  headerElement.classList.remove('header-text-gameover');
-  headerElement.innerHTML = 'Go!';
-  gameoverImageElement.classList.add('gameover-image-hidden');
-  restartElement.classList.add('restart-button-hidden');
-  inputElement.value = '';
-  inputElement.disabled = false;
-  counterElement.innerHTML = count;
+  resetElements();
 
   if (!digitsCache) digitsCache = await loadEDigits();
   const digits = digitsCache;
@@ -50,7 +40,7 @@ async function init() {
     // ignore non-printable keys (Shift, Arrow keys, Ctrl, Alt, etc.)
     if (key.length !== 1) return;
 
-    if (checkDigit(key, digits, inputDigits)) addCounter(key);
+    if (checkDigit(key)) addCounter(key);
     else gameOver();
   };
 
@@ -72,10 +62,28 @@ async function init() {
     restartElement.classList.remove('restart-button-hidden');
   }
 
-  function checkDigit(digit, digitsArr, inputArr) {
-    inputArr.push(digit);
-    const currentIndex = inputArr.length - 1; // last pushed index
-    return inputArr[currentIndex] === digitsArr[currentIndex];
+  function checkDigit(digit) {
+    inputDigits.push(digit);
+    const currentIndex = inputDigits.length - 1; // last pushed index
+    return inputDigits[currentIndex] === digits[currentIndex];
+  }
+
+  function resetElements() {
+    startElement.classList.add('start-button-hidden');
+
+    inputElement.classList.remove('input-box-hidden');
+    inputElement.value = '';
+    inputElement.disabled = false;
+
+    headerElement.classList.add('header-text-started');
+    headerElement.classList.remove('header-text-gameover');
+    headerElement.innerHTML = 'Go!';
+
+    gameoverImageElement.classList.add('gameover-image-hidden');
+    restartElement.classList.add('restart-button-hidden');
+
+    counterElement.classList.remove('counter-hidden');
+    counterElement.innerHTML = count;
   }
 }
 
