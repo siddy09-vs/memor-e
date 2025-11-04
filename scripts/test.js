@@ -41,6 +41,12 @@ async function init() {
   inputElement.onkeydown = (event) => {
     const key = event.key;
 
+    // prevent Backspace (and Delete) from removing input
+    if (key === 'Backspace' || key === 'Delete') {
+      event.preventDefault();
+      return;
+    }
+
     // ignore non-printable keys (Shift, Arrow keys, Ctrl, Alt, etc.)
     if (key.length !== 1) return;
 
