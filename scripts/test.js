@@ -1,39 +1,69 @@
+// ...existing code...
 const startElement = document.querySelector('.start-button');
-const counterElement = document.querySelector('.counter');
-const inputElement = document.querySelector('.input-box');
-const headerElement = document.querySelector('.header-text');
+const restartElement = document.querySelector('.restart-button');
+
+let count = 0;
+let digitsCache = null; // cache loaded digits so fetch runs once
 
 // Start Game
 startElement.addEventListener('click', () => {
-  startElement.classList.add('button-started');
-  counterElement.classList.add('counter-started');
-  inputElement.classList.add('input-box-started');
-  headerElement.classList.add('header-text-started');
-  headerElement.innerHTML = 'Go!';
+  init();
+});
 
+restartElement.addEventListener('click', () => {
+  count = 0;
   init();
 });
 
 async function init() {
-  const digits = await loadEDigits();
+  const counterElement = document.querySelector('.counter');
+  const inputElement = document.querySelector('.input-box');
+  const headerElement = document.querySelector('.header-text');
+  const gameoverImageElement = document.querySelector('.gameover-image');
+
+  startElement.classList.add('start-button-hidden');
+  counterElement.classList.remove('counter-hidden');
+  inputElement.classList.remove('input-box-hidden');
+  headerElement.classList.add('header-text-started');
+  headerElement.classList.remove('header-text-gameover');
+  headerElement.innerHTML = 'Go!';
+  gameoverImageElement.classList.add('gameover-image-hidden');
+  restartElement.classList.add('restart-button-hidden');
+  inputElement.value = '';
+  inputElement.disabled = false;
+  counterElement.innerHTML = count;
+
+  if (!digitsCache) digitsCache = await loadEDigits();
+  const digits = digitsCache;
   const inputDigits = [];
 
-  inputElement.addEventListener('keydown', (event) => {
+  // replace any previous handler instead of adding another listener
+  inputElement.onkeydown = (event) => {
     const key = event.key;
-    // ignore non-printable keys (Shift, Backspace, Enter, Arrow keys, etc.)
+
+    // ignore non-printable keys (Shift, Arrow keys, Ctrl, Alt, etc.)
     if (key.length !== 1) return;
 
-    if (checkDigit(key, digits, inputDigits)) addCounter();
+    if (checkDigit(key, digits, inputDigits)) addCounter(key);
     else gameOver();
-  });
+  };
 
-  function addCounter() {
-    const count = inputDigits.length;
+  // focus the input so typing starts immediately
+  inputElement.focus();
+
+  function addCounter(key) {
+    if (key !== '.') count++;
     counterElement.innerHTML = count;
   }
 
   function gameOver() {
-    counterElement.innerHTML = '-1';
+    counterElement.classList.add('counter-hidden');
+    gameoverImageElement.classList.remove('gameover-image-hidden');
+    headerElement.innerHTML = 'Game Over';
+    headerElement.classList.remove('header-text-started');
+    headerElement.classList.add('header-text-gameover');
+    inputElement.disabled = true;
+    restartElement.classList.remove('restart-button-hidden');
   }
 
   function checkDigit(digit, digitsArr, inputArr) {
@@ -44,15 +74,12 @@ async function init() {
 }
 
 async function loadEDigits() {
-  // Fetch the file (must be hosted in your project folder)
-  const response = await fetch('assets/e.txt'); // adjust path if needed
+  // Fetch the file
+  const response = await fetch('assets/e.txt');
   const text = await response.text();
 
-  // Clean: remove unwanted characters but keep digits and the dot
-  const clean = text.replace(/[^\d.]/g, '');
-
   // Split into an array of individual characters
-  const eArray = clean.split('');
+  const eArray = text.split('');
 
   return eArray;
 }

@@ -67,7 +67,19 @@ main {
 }
 
 .header-text-started {
-  margin-bottom: 250px;
+  margin-bottom: 300px;
+}
+
+.header-text-gameover {
+  margin-bottom: 76px;
+}
+
+.gameover-image {
+  height: 300px;
+  margin-bottom: 50px;
+}
+.gameover-image-hidden {
+  display: none;
 }
 
 .button {
@@ -93,8 +105,8 @@ main {
 }
 
 /* Game Started - Remove Start Button */
-.button-started {
-  opacity: 0;
+.start-button-hidden {
+  display: none;
 }
 
 .button:hover {
@@ -113,7 +125,6 @@ main {
 }
 
 .counter {
-  width: 44px;
   color: var(--title-text);
   font-family: 'EB Garamond';
   font-size: 75px;
@@ -121,11 +132,10 @@ main {
   font-weight: 400;
   line-height: normal;
   margin: 0 0 40px 0;
-  opacity: 0;
 }
 
-.counter-started {
-  opacity: 1;
+.counter-hidden {
+  display: none;
 }
 
 .input-box {
@@ -145,11 +155,10 @@ main {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  opacity: 0;
 }
 
-.input-box-started {
-  opacity: 1;
+.input-box-hidden {
+  display: none;
 }
 
 .input-box:focus {
@@ -160,4 +169,12 @@ main {
 
 .input-box::placeholder {
   color: var(--text-main-accent);
+}
+
+.restart-button {
+  margin-top: 50px;
+}
+
+.restart-button-hidden {
+  display: none;
 }
