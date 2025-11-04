@@ -65,7 +65,7 @@ async function init() {
   function gameOver() {
     counterElement.classList.add('counter-hidden');
     gameoverImageElement.classList.remove('gameover-image-hidden');
-    headerElement.innerHTML = 'Game Over';
+    headerElement.innerHTML = count + ' Digit(s)';
     headerElement.classList.remove('header-text-started');
     headerElement.classList.add('header-text-gameover');
     inputElement.disabled = true;
