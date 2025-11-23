@@ -74,10 +74,26 @@ main {
   margin-bottom: 76px;
 }
 
+@media screen and (max-width: 1500px) {
+  .header-text {
+    margin-top: 100px;
+    margin-bottom: 400px;
+  }
+
+  .header-text-started {
+    margin-bottom: 275px;
+  }
+
+  .header-text-gameover {
+    margin-bottom: 50px;
+  }
+}
+
 .gameover-image {
   height: 300px;
   margin-bottom: 50px;
 }
+
 .gameover-image-hidden {
   display: none;
 }

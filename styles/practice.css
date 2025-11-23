@@ -65,6 +65,12 @@ main {
   margin: 125px 0 75px 0;
 }
 
+@media screen and (max-width: 1500px) {
+  .header-text {
+    margin-top: 100px;
+  }
+}
+
 .options-box {
   display: flex;
   flex-direction: row;

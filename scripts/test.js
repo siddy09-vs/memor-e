@@ -1,4 +1,3 @@
-// ...existing code...
 const startElement = document.querySelector('.start-button');
 const restartElement = document.querySelector('.restart-button');
 
